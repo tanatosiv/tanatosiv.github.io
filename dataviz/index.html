@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  
+    <title>Proyecto de Visualización</title>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-light d-flex flex-row justify-content-start">
+      <!-- <a class="d-flex flex-row" href="#"> -->
+      <img src="http://marcianitosverdes.haaan.com/wp-content/uploads/2014/06/clip_image0025.jpg"  
+      class="align-top img-fluid" alt="">
+      <p class="mb-0 ml-4">Reporte de Admisiones</p>  
+</nav>
+
+<div id="primer" class="container-fluid" >
+  <div class="row"> 
+       <div class="col-6">
+           <table class="table">
+           <thead>
+               <tr>                  
+                   <th><i class="far fa-lightbulb 3x mt-4">GRE SCORE</i></th>
+                   </tr>
+           </thead>
+           
+           </table>
+           <div id="gre">
+
+            </div>
+           </div>
+           
+    <script>
+    
+    d3.dsv(",", "Admission_Predict.csv")
+
+   .then(function (data) {
+                       
+
+                var gre = [];
+
+                for (var i = 0; i < 5; i++) {
+                    console.log(data[i].Gre_Score);
+                    gre.push(data[i].Gre_Score);
+                }
+   
+
+var x = 0;
+
+d3.select("#gre")
+    .append("svg")
+    .attr("width", "350")
+    .attr("height", "350")
+    .append("g")
+    .selectAll("rect")
+    .data(gre)
+    .enter()
+    .append("rect")
+    .attr("x", function (d) {x = x + 40; return x; })
+    .attr("y", function (d) { return 350 - d  - 30; })
+    .attr("width", "30")
+    .attr("height", function (d) {return d;}) //la funcion llamara los datos de cada rectagulo dato por dato
+    .attr("fill", function(d) {
+    return "rgb(0, 0, " + (d * 10) + ")";
+
+    svg.selectAll("text")
+   .data(gre)
+   .enter()
+   .append("text")
+  //  .attr("x", function(d, i) {
+  //       return i * (w / dataset.length) + 5;  // +5
+  //  })
+  //  .attr("y", function(d) {
+  //       return h - (d * 4) + 15;              // +15
+  //  });
+
+});
+
+  });
+
+    </script>
+      
+    <style>
+     @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300,400,700,900');
+
+.navbar{
+    height: 100px;
+    background-color: white;
+}
+
+.navbar img{
+    width: 130px !important;
+    height: auto;
+}
+
+.navbar p{
+    font-size: 30px;
+    font-family: roboto;
+    color: rgb(97, 97, 97)
+
+}
+
+#primer tr{
+            background-color: #18bc9c!important;
+            height: 30px;
+            font-size: 2rem;
+            color: whitesmoke;
+            align-items:flex-start;
+            /*text-align: center; */
+        }
+
+ #primer .fas fa-dragon{
+            color:white!important;
+            
+        }
+
+
+      
+
+    
+    </style>  
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>
